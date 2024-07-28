@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table with Print and Copy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .buttons {
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="buttons">
+    <button onclick="printTable()">Print Table</button>
+    <button onclick="copyTable()">Copy Table</button>
+</div>
+
+<table id="dataTable">
+    <tr>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>50</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>133</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>146</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>74</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>77</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>66</td>
+        <td></td>
+    </tr>
+    <tr style="background-color: yellow;">
+        <td>546</td>
+        <td>ليا عند الشركة</td>
+    </tr>
+</table>
+
+<script>
+    function printTable() {
+        const printContent = document.getElementById('dataTable').outerHTML;
+        const originalContent = document.body.innerHTML;
+        document.body.innerHTML = printContent;
+        window.print();
+        document.body.innerHTML = originalContent;
+    }
+
+    function copyTable() {
+        const table = document.getElementById('dataTable');
+        const range = document.createRange();
+        range.selectNode(table);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        alert('Table copied to clipboard');
+    }
+</script>
+
+</body>
+</html>
